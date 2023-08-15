@@ -1,22 +1,17 @@
 <script setup>
   import { reactive } from "vue";
+  import Cabecalho from './components/Cabecalho.vue';
+  import Formulario from './components/Formulario.vue';
+  import ListaDeTarefas from './components/ListaDeTarefas.vue';
 
   const estadoLista = reactive({
     filtro: 'todas',
     tarefaNova: '',
     tarefas: [
       {
-        titulo: 'Estudar ES6',
-        finalizado: false
-      },
-      {
-        titulo: 'Estudar Sass',
-        finalizado: false
-      },
-      {
-        titulo: 'Estudar Js',
-        finalizado: true
-      }
+        titulo:'Estudar',
+        finalizado: false,
+      },  
     ]
   })
 
@@ -53,37 +48,9 @@
 
 <template>
   <div class="container">
-    <header class="p-5 md-4 mt-4 bg-light rounded-3">
-      <h1>Minhas tarefas</h1>
-      <p>
-        Voce possui {{ getTarefasPendentes().length }} tarefas pendentes
-      </p>
-    </header>
-    <form @submit.prevent="cadastrarTarefa" class="mt-4">
-      <div class="row">
-        <div class="col">
-          <input :value ="estadoLista.tarefaNova" @change="evento => estadoLista.tarefaNova = evento.target.value" required type="text" placeholder="Digite aqui a descrição da tarefa" class="form-control">
-        </div>
-        <div class="col-md-2">
-          <button type="submit" class="btn btn-primary">Cadastrar</button>
-        </div>
-        <div class="col-md-2">
-          <select @change="evento => estadoLista.filtro = evento.target.value" class="form-control">
-            <option value="todas">Todas tarefas</option>
-            <option value="pendentes">Tarefas pendentes</option>
-            <option value="finalizadas">Tarefas finalizadas</option>
-          </select>
-        </div>
-      </div>
-    </form>
-    <ul class="list-group mt-4" v-for="tarefa in getTarefasFilter()">
-      <li class="list-group-item">
-        <input @change="evento => tarefa.finalizado = evento.target.checked" :checked="tarefa.finalizado" :id="tarefa.titulo" type="checkbox">
-        <label :class="{ done: tarefa.finalizado }" class="ms-3" :for="tarefa.titulo">
-          {{ tarefa.titulo }}
-        </label>
-      </li>
-    </ul>
+    <Cabecalho :tarefas-pendentes="getTarefasPendentes().length"></Cabecalho>
+    <Formulario :tarefa-nova="estadoLista.tarefaNova" :edita-tarefa-nova="evento => estadoLista.tare = evento.target.value" :cadastra-tarefa="cadastrarTarefa"></Formulario>
+    <!-- <ListaDeTarefas :get-tarefas-filtro="getTarefasFilter()" :tarefa-finalizada="evento => tarefa.finalizado = evento.target.checked" :checked="tarefa.finalizado" :titulo-tarefa="tarefa.titulo" /> -->
   </div>
 </template>
 
