@@ -6,7 +6,7 @@
     <form @submit.prevent="props.cadastraTarefa" class="mt-4">
         <div class="row">
             <div class="col">
-                <input :value ="props.tarefaNova" @change="props.editaTarefaNova" required type="text" placeholder="Digite aqui a descrição da tarefa" class="form-control">
+                <input :value ="props.tarefaNova" @change="props.editaTarefaNova" required type="text" placeholder="Digite aqui a descrição da tarefa" class="form-control mb-3">
             </div>
             <div class="col-md-2">
                 <button type="submit" class="btn btn-primary">Cadastrar</button>

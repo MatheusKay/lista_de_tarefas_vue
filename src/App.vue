@@ -8,17 +8,16 @@
     filtro: 'todas',
     tarefaNova: '',
     tarefas: [
-      {
-        titulo:'Estudar',
-        finalizado: false,
-      },  
+        
     ]
   })
 
   function getTarefasPendentes() {
     return estadoLista.tarefas.filter(tarefa => !tarefa.finalizado)
+
   }
 
+  
   function getTarefasFinalizadas() {
     return estadoLista.tarefas.filter(tarefa => tarefa.finalizado)
   }
@@ -30,12 +29,12 @@
       case 'pendentes':
         return getTarefasPendentes();
       case 'finalizadas': 
-        return getTarefasFinalizadas();
+      return getTarefasFinalizadas();
       default:
         return estadoLista.tarefas
+      }
     }
-  }
-
+    
   const cadastrarTarefa = () => {
     const tarefaNova = {
       titulo: estadoLista.tarefaNova,
@@ -49,8 +48,8 @@
 <template>
   <div class="container">
     <Cabecalho :tarefas-pendentes="getTarefasPendentes().length"></Cabecalho>
-    <Formulario :tarefa-nova="estadoLista.tarefaNova" :edita-tarefa-nova="evento => estadoLista.tare = evento.target.value" :cadastra-tarefa="cadastrarTarefa"></Formulario>
-    <!-- <ListaDeTarefas :get-tarefas-filtro="getTarefasFilter()" :tarefa-finalizada="evento => tarefa.finalizado = evento.target.checked" :checked="tarefa.finalizado" :titulo-tarefa="tarefa.titulo" /> -->
+    <Formulario :trocra-filtro="evento => estadoLista.filtro = evento.target.value" :tarefa-nova="estadoLista.tarefaNova" :edita-tarefa-nova="evento => estadoLista.tarefaNova = evento.target.value" :cadastra-tarefa="cadastrarTarefa"></Formulario>
+    <ListaDeTarefas :tarefas="getTarefasFilter()" :tarefas-filtro="getTarefasFilter().length" :tarefas-pendentes="getTarefasPendentes().length"></ListaDeTarefas>
   </div>
 </template>
 
